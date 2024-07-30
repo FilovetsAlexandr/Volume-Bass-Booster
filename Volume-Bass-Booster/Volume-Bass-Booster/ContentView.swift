@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var splashViewModel = SplashViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if splashViewModel.isActive {
+            MainView()
+        } else {
+            SplashView(viewModel: splashViewModel)
         }
-        .padding()
     }
 }
 
