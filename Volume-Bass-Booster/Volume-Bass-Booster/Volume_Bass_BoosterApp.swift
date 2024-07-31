@@ -12,6 +12,7 @@ struct Volume_Bass_BoosterApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.colorScheme, .dark)
         }
     }
 }
