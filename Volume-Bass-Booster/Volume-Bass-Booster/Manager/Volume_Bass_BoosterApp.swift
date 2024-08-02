@@ -21,6 +21,8 @@ struct Volume_Bass_BoosterApp: App {
                                MainView()
                            case .settings:
                                SettingsView()
+                           case .library:
+                               LibraryView()
                            }
                        }
                }
@@ -30,5 +32,3 @@ struct Volume_Bass_BoosterApp: App {
            }
        }
 }
-
-//.environment(\.colorScheme, .dark)

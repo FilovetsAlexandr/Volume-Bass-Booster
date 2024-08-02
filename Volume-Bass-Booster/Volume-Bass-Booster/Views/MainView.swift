@@ -36,7 +36,7 @@ struct MainView: View {
                 // MARK: -- Library & Settings
                  HStack {
                     Button {
-                        // Действие для открытия библиотеки
+                        router.navigate(to: .library)
                     } label: {
                         Image("library")
                             .resizable()

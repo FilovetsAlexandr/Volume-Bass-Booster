@@ -21,7 +21,7 @@ struct Files: View {
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(Color.yellow)
+                        .fill(Color.theme.yellowColor)
                         .frame(width: 155, height: 54)
                     HStack {
                         Image("black_plus")
