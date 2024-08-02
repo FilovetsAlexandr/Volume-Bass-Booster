@@ -9,6 +9,7 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var router: Router
     @State var isAnimating = true
     var body: some View {
         // MARK: -- Background
@@ -44,7 +45,7 @@ struct MainView: View {
                     }
                     Spacer()
                     Button {
-                        // Действие для открытия настроек
+                        router.navigate(to: .settings)
                     } label: {
                         Image("settings")
                             .resizable()

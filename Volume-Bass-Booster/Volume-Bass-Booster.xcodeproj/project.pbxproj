@@ -23,6 +23,8 @@
 		F48F17782C5A3CD3006A63A3 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48F17772C5A3CD3006A63A3 /* Files.swift */; };
 		F48F177A2C5A40D0006A63A3 /* ArchivoItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F48F17792C5A40D0006A63A3 /* ArchivoItalic.ttf */; };
 		F48F177C2C5A5C69006A63A3 /* Archivo-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F48F177B2C5A5C69006A63A3 /* Archivo-Italic.ttf */; };
+		F497F7CA2C5CD6B200E8E1EF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497F7C92C5CD6B200E8E1EF /* Router.swift */; };
+		F497F7CC2C5CD92800E8E1EF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497F7CB2C5CD92800E8E1EF /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		F48F17772C5A3CD3006A63A3 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		F48F17792C5A40D0006A63A3 /* ArchivoItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArchivoItalic.ttf; sourceTree = "<group>"; };
 		F48F177B2C5A5C69006A63A3 /* Archivo-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Archivo-Italic.ttf"; sourceTree = "<group>"; };
+		F497F7C92C5CD6B200E8E1EF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		F497F7CB2C5CD92800E8E1EF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				F4658D622C592BDF002698A2 /* MainView.swift */,
 				F48F17722C5981B2006A63A3 /* Gallery.swift */,
 				F48F17772C5A3CD3006A63A3 /* Files.swift */,
+				F497F7C92C5CD6B200E8E1EF /* Router.swift */,
+				F497F7CB2C5CD92800E8E1EF /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,6 +246,7 @@
 			files = (
 				F4658D652C592C06002698A2 /* SplashViewModel.swift in Sources */,
 				F4658D532C592B41002698A2 /* ContentView.swift in Sources */,
+				F497F7CA2C5CD6B200E8E1EF /* Router.swift in Sources */,
 				F48F17782C5A3CD3006A63A3 /* Files.swift in Sources */,
 				F4658D632C592BDF002698A2 /* MainView.swift in Sources */,
 				F4658D732C597272002698A2 /* CustomBackgroundView.swift in Sources */,
@@ -247,6 +254,7 @@
 				F4658D612C592BBE002698A2 /* SplashView.swift in Sources */,
 				F48F17732C5981B2006A63A3 /* Gallery.swift in Sources */,
 				F48F17762C598777006A63A3 /* Color+Extension.swift in Sources */,
+				F497F7CC2C5CD92800E8E1EF /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +402,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -434,7 +442,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

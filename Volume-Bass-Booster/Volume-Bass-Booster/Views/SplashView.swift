@@ -7,8 +7,12 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct SplashView: View {
-    @ObservedObject var viewModel: SplashViewModel
+    @EnvironmentObject var router: Router
+    @State private var isActive = false
+
     var body: some View {
         VStack {
             Spacer()
@@ -22,11 +26,17 @@ struct SplashView: View {
                 .scaleEffect(2)
         }
         .onAppear {
-            viewModel.startLoading()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    router.navigate(to: .main)
+                }
+            }
         }
     }
 }
 
-#Preview {
-    SplashView(viewModel: SplashViewModel())
+struct SplashView_Previews: PreviewProvider {
+    static var previews: some View {
+        SplashView().environmentObject(Router())
+    }
 }

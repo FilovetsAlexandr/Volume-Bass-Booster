@@ -9,10 +9,26 @@ import SwiftUI
 
 @main
 struct Volume_Bass_BoosterApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environment(\.colorScheme, .dark)
-        }
-    }
+    @ObservedObject var router = Router()
+       
+       var body: some Scene {
+           WindowGroup {
+               NavigationStack(path: $router.navPath) {
+                   SplashView()
+                       .navigationDestination(for: Router.Destination.self) { destination in
+                           switch destination {
+                           case .main:
+                               MainView()
+                           case .settings:
+                               SettingsView()
+                           }
+                       }
+               }
+               .environmentObject(router)
+               .environment(\.colorScheme, .dark)
+
+           }
+       }
 }
+
+//.environment(\.colorScheme, .dark)
