@@ -6,25 +6,28 @@
 //
 
 import SwiftUI
+import PhotosUI
+import SDWebImageSwiftUI
 
 struct Gallery: View {
+    @ObservedObject var photoLibraryManager: PhotoLibraryManager
+
     var body: some View {
         VStack {
             Image("gallery")
                 .resizable()
                 .frame(width: 105, height: 105)
                 .scaledToFit()
-
                 .padding()
             Button {
-                // galery open
+                photoLibraryManager.requestPhotoLibraryAccess()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
                         .fill(Color.theme.yellowColor)
                         .frame(width: 155, height: 54)
-                    HStack{
-                        Image ("black_plus")
+                    HStack {
+                        Image("black_plus")
                             .resizable()
                             .frame(width: 22, height: 22)
                         Text("Gallery")
@@ -47,6 +50,6 @@ struct Gallery: View {
     }
 }
 
-#Preview {
-    Gallery()
-}
+//#Preview {
+//    Gallery()
+//}

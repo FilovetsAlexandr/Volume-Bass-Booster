@@ -10,6 +10,10 @@
 		F45858962C5CE33200F17EA6 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45858952C5CE33200F17EA6 /* LibraryView.swift */; };
 		F45858982C5CE7F600F17EA6 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45858972C5CE7F600F17EA6 /* FileManager.swift */; };
 		F458589A2C5CE8A500F17EA6 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45858992C5CE8A500F17EA6 /* CustomSegmentedControl.swift */; };
+		F458589D2C5CFAE600F17EA6 /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F458589C2C5CFAE600F17EA6 /* PhotoLibraryManager.swift */; };
+		F458589F2C5CFD1500F17EA6 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F458589E2C5CFD1500F17EA6 /* ImagePickerView.swift */; };
+		F45858A12C5CFD8900F17EA6 /* PermissionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45858A02C5CFD8900F17EA6 /* PermissionSheetView.swift */; };
+		F45858A32C5D090200F17EA6 /* VideoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45858A22C5D090200F17EA6 /* VideoPickerView.swift */; };
 		F4658D512C592B41002698A2 /* Volume_Bass_BoosterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4658D502C592B41002698A2 /* Volume_Bass_BoosterApp.swift */; };
 		F4658D532C592B41002698A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4658D522C592B41002698A2 /* ContentView.swift */; };
 		F4658D552C592B44002698A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4658D542C592B44002698A2 /* Assets.xcassets */; };
@@ -34,6 +38,10 @@
 		F45858952C5CE33200F17EA6 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		F45858972C5CE7F600F17EA6 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		F45858992C5CE8A500F17EA6 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		F458589C2C5CFAE600F17EA6 /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
+		F458589E2C5CFD1500F17EA6 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		F45858A02C5CFD8900F17EA6 /* PermissionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheetView.swift; sourceTree = "<group>"; };
+		F45858A22C5D090200F17EA6 /* VideoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPickerView.swift; sourceTree = "<group>"; };
 		F4658D4D2C592B41002698A2 /* Volume-Bass-Booster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Volume-Bass-Booster.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4658D502C592B41002698A2 /* Volume_Bass_BoosterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume_Bass_BoosterApp.swift; sourceTree = "<group>"; };
 		F4658D522C592B41002698A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,8 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				F4658D502C592B41002698A2 /* Volume_Bass_BoosterApp.swift */,
-				F497F7C92C5CD6B200E8E1EF /* Router.swift */,
 				F45858972C5CE7F600F17EA6 /* FileManager.swift */,
+				F458589C2C5CFAE600F17EA6 /* PhotoLibraryManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -117,6 +125,7 @@
 		F4658D5E2C592B81002698A2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F497F7C92C5CD6B200E8E1EF /* Router.swift */,
 				F4658D522C592B41002698A2 /* ContentView.swift */,
 				F4658D602C592BBE002698A2 /* SplashView.swift */,
 				F4658D622C592BDF002698A2 /* MainView.swift */,
@@ -165,10 +174,13 @@
 		F4658D712C597240002698A2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F458589E2C5CFD1500F17EA6 /* ImagePickerView.swift */,
 				F48F17772C5A3CD3006A63A3 /* Files.swift */,
 				F48F17722C5981B2006A63A3 /* Gallery.swift */,
 				F4658D722C597272002698A2 /* CustomBackgroundView.swift */,
 				F45858992C5CE8A500F17EA6 /* CustomSegmentedControl.swift */,
+				F45858A02C5CFD8900F17EA6 /* PermissionSheetView.swift */,
+				F45858A22C5D090200F17EA6 /* VideoPickerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -261,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F45858A32C5D090200F17EA6 /* VideoPickerView.swift in Sources */,
 				F4658D652C592C06002698A2 /* SplashViewModel.swift in Sources */,
 				F4658D532C592B41002698A2 /* ContentView.swift in Sources */,
 				F497F7CA2C5CD6B200E8E1EF /* Router.swift in Sources */,
@@ -269,11 +282,14 @@
 				F4658D632C592BDF002698A2 /* MainView.swift in Sources */,
 				F4658D732C597272002698A2 /* CustomBackgroundView.swift in Sources */,
 				F458589A2C5CE8A500F17EA6 /* CustomSegmentedControl.swift in Sources */,
+				F458589D2C5CFAE600F17EA6 /* PhotoLibraryManager.swift in Sources */,
 				F4658D512C592B41002698A2 /* Volume_Bass_BoosterApp.swift in Sources */,
 				F45858982C5CE7F600F17EA6 /* FileManager.swift in Sources */,
 				F4658D612C592BBE002698A2 /* SplashView.swift in Sources */,
+				F458589F2C5CFD1500F17EA6 /* ImagePickerView.swift in Sources */,
 				F48F17732C5981B2006A63A3 /* Gallery.swift in Sources */,
 				F48F17762C598777006A63A3 /* Color+Extension.swift in Sources */,
+				F45858A12C5CFD8900F17EA6 /* PermissionSheetView.swift in Sources */,
 				F497F7CC2C5CD92800E8E1EF /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +429,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Volume-Bass-Booster/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Allow access to your Photo Library for editing and saving video and auido files.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -453,6 +470,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Volume-Bass-Booster/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Allow access to your Photo Library for editing and saving video and auido files.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
