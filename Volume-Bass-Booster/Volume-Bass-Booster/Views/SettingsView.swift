@@ -16,7 +16,7 @@ struct SettingsView: View {
                 Button {
                     router.navigateBack()
                 } label: {
-                    Image(systemName: "chevron.left")
+                    Image("arrow_left")
                         .resizable()
                         .frame(width: 24, height: 24)
                 }
@@ -32,15 +32,13 @@ struct SettingsView: View {
             }
             .padding()
             
-            Spacer(minLength: 20)
-            
-            VStack(spacing: 10) {
-                SettingsRow(imageName: "envelope.fill", title: "Contact Us")
-                SettingsRow(imageName: "hand.thumbsup.fill", title: "Rate Us")
-                SettingsRow(imageName: "megaphone.fill", title: "Share app")
-                SettingsRow(imageName: "lock.fill", title: "Restore Purchases")
-                SettingsRow(imageName: "doc.text.fill", title: "Terms of Use")
-                SettingsRow(imageName: "shield.fill", title: "Privacy Policy")
+            VStack(spacing: 8) {
+                SettingsRow(imageName: "contact-us", title: "Contact Us")
+                SettingsRow(imageName: "rate-us", title: "Rate Us")
+                SettingsRow(imageName: "share-app", title: "Share app")
+                SettingsRow(imageName: "restore-purchases", title: "Restore Purchases")
+                SettingsRow(imageName: "terms-of-use", title: "Terms of Use")
+                SettingsRow(imageName: "privacy-policy", title: "Privacy Policy")
             }
             .padding(.horizontal)
             
@@ -48,6 +46,7 @@ struct SettingsView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Color.black.edgesIgnoringSafeArea(.all))
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -56,25 +55,27 @@ struct SettingsRow: View {
     var title: String
     
     var body: some View {
-        HStack {
-            Image(systemName: imageName)
-                .resizable()
-                .frame(width: 24, height: 24)
-                .foregroundColor(.yellow)
-                .padding()
-                .background(Circle().fill(Color.black.opacity(0.6)))
-            Text(title)
-                .font(.custom("Archivo", size: 18))
-                .foregroundColor(.white)
-            Spacer()
-            Image(systemName: "chevron.right")
-                .resizable()
-                .frame(width: 12, height: 24)
-                .foregroundColor(.white)
+        Button {
+            // row
+        } label: {
+            HStack {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: 54, height: 54)
+                Text(title)
+                    .font(.custom("Archivo", size: 15))
+                    .foregroundColor(.white)
+                Spacer()
+                Image("arrow_right")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+            }
         }
         .padding()
-        .background(Color.black.opacity(0.2))
-        .cornerRadius(15)
+        .frame(height: 74)
+//        .background(Color.black.opacity(0.2))
+        .background(Color.white.opacity(0.07))
+        .cornerRadius(30)
     }
 }
 
