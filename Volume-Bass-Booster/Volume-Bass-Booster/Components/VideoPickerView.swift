@@ -10,6 +10,7 @@ import PhotosUI
 
 struct VideoPickerView: UIViewControllerRepresentable {
     @Binding var selectedVideoURL: URL?
+    @Environment(\.presentationMode) var presentationMode
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var configuration = PHPickerConfiguration()
@@ -41,12 +42,15 @@ struct VideoPickerView: UIViewControllerRepresentable {
             if provider.hasItemConformingToTypeIdentifier(UTType.movie.identifier as String) {
                 provider.loadItem(forTypeIdentifier: UTType.movie.identifier as String, options: nil) { (url, error) in
                     DispatchQueue.main.async {
-                        self.parent.selectedVideoURL = url as? URL
+                        if let url = url as? URL {
+                            self.parent.selectedVideoURL = url
+                        }
+                        self.parent.presentationMode.wrappedValue.dismiss()
                     }
                 }
+            } else {
+                picker.dismiss(animated: true, completion: nil)
             }
-            picker.dismiss(animated: true, completion: nil)
         }
     }
 }
-

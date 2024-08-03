@@ -23,6 +23,10 @@ struct Volume_Bass_BoosterApp: App {
                                SettingsView()
                            case .library:
                                LibraryView()
+                           case .soundsettings:
+                               SoundSettingsView()
+//                           case .compressvideo(let videoURL): // Обработка параметра videoURL
+//                               CompressVideoView(videoURL: videoURL)
                            }
                        }
                }

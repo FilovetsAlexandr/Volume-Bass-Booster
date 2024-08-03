@@ -13,6 +13,8 @@ final class Router: ObservableObject {
         case main
         case settings
         case library
+        case soundsettings
+//        case compressvideo(videoURL: URL)
     }
     
     @Published var navPath = NavigationPath()

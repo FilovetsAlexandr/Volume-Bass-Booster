@@ -5,31 +5,31 @@
 //  Created by Alexandr Filovets on 2.08.24.
 //
 
-import PhotosUI
 import SwiftUI
+import Photos
 
 class PhotoLibraryManager: ObservableObject {
     @Published var showingPermissionSheet = false
-    @Published var showingVideoPicker = false
-    @Published var selectedVideoURL: URL?
 
-    func requestPhotoLibraryAccess() {
+    func requestPermission() {
         PHPhotoLibrary.requestAuthorization { status in
             DispatchQueue.main.async {
                 switch status {
-                case .authorized, .limited:
-                    self.showingVideoPicker = true
+                case .authorized:
+                    self.showingPermissionSheet = false
                 case .denied, .restricted:
                     self.showingPermissionSheet = true
                 case .notDetermined:
-                    break
+                    self.showingPermissionSheet = true
+                case .limited:
+                    self.showingPermissionSheet = false
                 @unknown default:
                     break
                 }
             }
         }
     }
-
+    
     func openSettings() {
         guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
             return
@@ -39,3 +39,5 @@ class PhotoLibraryManager: ObservableObject {
         }
     }
 }
+
+

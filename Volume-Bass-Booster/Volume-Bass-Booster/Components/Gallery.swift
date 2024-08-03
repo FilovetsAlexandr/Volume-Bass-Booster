@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 
 struct Gallery: View {
     @ObservedObject var photoLibraryManager: PhotoLibraryManager
-
+    
     var body: some View {
         VStack {
             Image("gallery")
@@ -20,11 +20,11 @@ struct Gallery: View {
                 .scaledToFit()
                 .padding()
             Button {
-                photoLibraryManager.requestPhotoLibraryAccess()
+                photoLibraryManager.requestPermission()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(Color.theme.yellowColor)
+                        .fill(Color.yellow)
                         .frame(width: 155, height: 54)
                     HStack {
                         Image("black_plus")
@@ -49,6 +49,7 @@ struct Gallery: View {
         )
     }
 }
+
 
 //#Preview {
 //    Gallery()

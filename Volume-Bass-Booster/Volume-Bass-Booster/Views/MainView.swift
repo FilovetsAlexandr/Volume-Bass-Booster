@@ -11,11 +11,11 @@ import PhotosUI
 
 struct MainView: View {
     @EnvironmentObject var router: Router
+    @StateObject var photoLibraryManager = PhotoLibraryManager()
+    @State private var showSheet: Bool = false
     @State var isAnimating = true
-    @StateObject private var photoLibraryManager = PhotoLibraryManager()
-    
+
     var body: some View {
-        // MARK: -- Background
         ZStack {
             CustomBackgroundView(images: [
                 BackgroundImageModel(
@@ -34,9 +34,8 @@ struct MainView: View {
                     positionHeight: 0.255,
                     height: 80)
             ])
-            // MARK: -- Main Stack
+            
             VStack {
-                // MARK: -- Library & Settings
                 HStack {
                     Button {
                         router.navigate(to: .library)
@@ -56,6 +55,7 @@ struct MainView: View {
                             .padding()
                     }
                 }
+                
                 Text("Volume & Bass \nBooster")
                     .font(.custom("Archivo", size: 42))
                     .bold()
@@ -63,19 +63,21 @@ struct MainView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
                     .padding(.top, 15)
+                
                 Text("Upgrade the audio quality and boost \nthe volume for clearer and louder sound")
                     .font(.custom("Archivo", size: 17))
                     .multilineTextAlignment(.trailing)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.top, 15)
                     .padding()
+                
                 Text("Select audio or video to boost")
                     .font(.custom("Archivo", size: 18))
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 65)
                     .padding()
-                // MARK: -- Galery & Files
+                
                 HStack {
                     Gallery(photoLibraryManager: photoLibraryManager)
                     Files()
@@ -84,14 +86,31 @@ struct MainView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .navigationBarBackButtonHidden(true)
         }
-        .sheet(isPresented: $photoLibraryManager.showingVideoPicker) {
-            VideoPickerView(selectedVideoURL: $photoLibraryManager.selectedVideoURL)
-        }
-        .sheet(isPresented: $photoLibraryManager.showingPermissionSheet) {
-            PermissionSheetView(photoLibraryManager: photoLibraryManager)
+        .floatingBottomSheet(isPresented: $showSheet) {
+            SheetView(
+                title: "Enable access to your Photos",
+                content: "For editing and saving video and audio files, please enable Photos access in your iPhone settings.",
+                image: .init(
+                    content: "photo",
+                    tint: .yellow,
+                    foreground: .white),
+                button1: .init(
+                    content: "Go to Settings",
+                    tint: .green,
+                    foreground: .white),
+                button2: .init(
+                    content: "Cancel",
+                    tint: Color.red,
+                    foreground: .white
+                )
+            )
+            .presentationDetents([.height(330)])
         }
     }
 }
+
+
+
 
 #Preview {
     MainView()

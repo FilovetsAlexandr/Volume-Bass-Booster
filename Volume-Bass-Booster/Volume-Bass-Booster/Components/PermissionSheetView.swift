@@ -7,16 +7,17 @@
 
 import SwiftUI
 
+
 struct PermissionSheetView: View {
     @ObservedObject var photoLibraryManager: PhotoLibraryManager
     
     var body: some View {
         VStack {
-            Spacer()
             Image(systemName: "photo")
                 .resizable()
                 .frame(width: 100, height: 100)
                 .foregroundColor(.yellow)
+                .padding(.top, 20)
             Text("Enable access to your Photos")
                 .font(.custom("Archivo", size: 18))
                 .foregroundColor(.white)
@@ -31,24 +32,40 @@ struct PermissionSheetView: View {
                 photoLibraryManager.openSettings()
             }) {
                 Text("Go to Settings")
-                    .foregroundColor(.black)
-                    .fontWeight(.bold)
+                    .foregroundColor(.white)
                     .padding()
-                    .background(Color.yellow)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green)
                     .cornerRadius(10)
             }
+            .padding(.horizontal)
             Button(action: {
                 photoLibraryManager.showingPermissionSheet = false
             }) {
                 Text("Cancel")
                     .foregroundColor(.white)
                     .padding()
-                    .background(Color.gray)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
                     .cornerRadius(10)
-                    .padding(.top, 10)
             }
+            .padding(.horizontal)
+            .padding(.top, 10)
             Spacer()
         }
-        .background(Color.black.edgesIgnoringSafeArea(.all))
+        .padding()
+        .background(Color.black)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+        .frame(maxWidth: .infinity)
+        .frame(height: UIScreen.main.bounds.height / 2)
+    }
+}
+
+
+
+struct PermissionSheetView_Previews: PreviewProvider {
+    static var previews: some View {
+        PermissionSheetView(photoLibraryManager: PhotoLibraryManager())
     }
 }
