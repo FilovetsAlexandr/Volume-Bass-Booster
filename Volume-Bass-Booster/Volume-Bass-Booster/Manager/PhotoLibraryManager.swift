@@ -6,38 +6,43 @@
 //
 
 import SwiftUI
-import Photos
+import PhotosUI
 
 class PhotoLibraryManager: ObservableObject {
     @Published var showingPermissionSheet = false
-
-    func requestPermission() {
-        PHPhotoLibrary.requestAuthorization { status in
-            DispatchQueue.main.async {
-                switch status {
-                case .authorized:
-                    self.showingPermissionSheet = false
-                case .denied, .restricted:
-                    self.showingPermissionSheet = true
-                case .notDetermined:
-                    self.showingPermissionSheet = true
-                case .limited:
-                    self.showingPermissionSheet = false
-                @unknown default:
-                    break
+    @Published var authorizationStatus = PHAuthorizationStatus.notDetermined
+    
+    init() {
+        updateAuthorizationStatus()
+    }
+    
+    func updateAuthorizationStatus() {
+        authorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+    }
+    
+    func requestPhotoLibraryAccess() {
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        switch status {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] newStatus in
+                DispatchQueue.main.async {
+                    self?.updateAuthorizationStatus()
+                    if newStatus != .authorized {
+                        self?.showingPermissionSheet = true
+                    }
                 }
             }
+        case .denied, .restricted:
+            showingPermissionSheet = true
+        case .authorized, .limited:
+            updateAuthorizationStatus()
+        @unknown default:
+            break
         }
     }
     
     func openSettings() {
-        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
-            return
-        }
-        if UIApplication.shared.canOpenURL(settingsURL) {
-            UIApplication.shared.open(settingsURL)
-        }
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(settingsURL)
     }
 }
-
-
