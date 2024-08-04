@@ -79,7 +79,7 @@ struct MainView: View {
                     .padding()
                 
                 HStack {
-                    Gallery(photoLibraryManager: photoLibraryManager)
+                    Gallery(photoLibraryManager: photoLibraryManager, showSheet: $showSheet)
                     Files()
                 }
             }
@@ -90,26 +90,22 @@ struct MainView: View {
             SheetView(
                 title: "Enable access to your Photos",
                 content: "For editing and saving video and audio files, please enable Photos access in your iPhone settings.",
-                image: .init(
-                    content: "photo",
-                    tint: .yellow,
-                    foreground: .white),
+                image: "gallery",
                 button1: .init(
                     content: "Go to Settings",
-                    tint: .green,
-                    foreground: .white),
+                    tint: Color.theme.yellowColor,
+                    foreground: .black),
                 button2: .init(
                     content: "Cancel",
-                    tint: Color.red,
+                    tint: Color.white.opacity(0.07),
                     foreground: .white
-                )
+                ),
+                photoLibraryManager: photoLibraryManager
             )
             .presentationDetents([.height(330)])
         }
     }
 }
-
-
 
 
 #Preview {

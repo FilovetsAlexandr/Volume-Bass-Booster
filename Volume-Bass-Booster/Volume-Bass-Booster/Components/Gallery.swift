@@ -11,7 +11,8 @@ import SDWebImageSwiftUI
 
 struct Gallery: View {
     @ObservedObject var photoLibraryManager: PhotoLibraryManager
-    
+    @Binding var showSheet: Bool
+
     var body: some View {
         VStack {
             Image("gallery")
@@ -20,11 +21,14 @@ struct Gallery: View {
                 .scaledToFit()
                 .padding()
             Button {
-                photoLibraryManager.requestPermission()
+                photoLibraryManager.requestPhotoLibraryAccess()
+                if photoLibraryManager.showingPermissionSheet {
+                    showSheet = true
+                }
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(Color.yellow)
+                        .fill(Color.theme.yellowColor)
                         .frame(width: 155, height: 54)
                     HStack {
                         Image("black_plus")

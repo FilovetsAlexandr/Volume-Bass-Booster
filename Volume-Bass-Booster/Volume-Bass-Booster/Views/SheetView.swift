@@ -10,53 +10,59 @@ import SwiftUI
 struct SheetView: View {
     var title: String
     var content: String
-    var image: Config
+    var image: String
     var button1: Config
     var button2: Config?
+    @ObservedObject var photoLibraryManager: PhotoLibraryManager
+    @EnvironmentObject var router: Router
+
     var body: some View {
         VStack(spacing: 15) {
-            Image(systemName: image.content)
-                .font(.title3)
-                .foregroundStyle(image.foreground)
-                .frame(width: 65,height: 65)
-                .background(image.tint.gradient, in: .circle)
+            Image(image)
+                .resizable()
+                .frame(width: 65, height: 65)
             
             Text(title)
-                .font(.title3.bold())
+                .font(.custom("Archivo", size: 24))
+                .bold()
             
             Text(content)
-                .font(.callout)
+                .font(.custom("Archivo", size: 15))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.white)
             
-            ButtonView(button1)
+            ButtonView(button1, action: photoLibraryManager.openSettings)
             if let button2 {
-                ButtonView(button2)
+                ButtonView(button2) {
+                    router.navigate(to: .main)
+                }
             }
+            
         }
         .padding([.horizontal, .bottom], 15)
         .background {
-            RoundedRectangle(cornerRadius: 15)
+            RoundedRectangle(cornerRadius: 30)
+            
                 .fill(.background)
                 .padding(.top, 30)
         }
         .shadow(color: .black.opacity(0.12), radius: 8)
         .padding(.horizontal, 15)
+        
     }
+
     @ViewBuilder
-    func ButtonView(_ config: Config) -> some View {
-        Button {
-            
-        } label: {
+    func ButtonView(_ config: Config, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
             Text(config.content)
-                .fontWeight(.bold)
+                .font(.custom("Archivo", size: 16))
                 .foregroundStyle(config.foreground)
                 .padding(.vertical, 10)
                 .frame(maxWidth: .infinity)
-                .background(config.tint.gradient, in: .rect(cornerRadius: 10))
+                .frame(height: 54)
+                .background(config.tint.gradient, in: .rect(cornerRadius: 30))
         }
-
     }
     
     struct Config {
