@@ -5,14 +5,15 @@
 //  Created by Alexandr Filovets on 2.08.24.
 //
 
-import SwiftUI
 import PhotosUI
+import SwiftUI
 
-class PhotoLibraryManager: ObservableObject {
+class PhotoLibraryManager: NSObject, ObservableObject, PHPickerViewControllerDelegate {
     @Published var showingPermissionSheet = false
     @Published var authorizationStatus = PHAuthorizationStatus.notDetermined
     
-    init() {
+    override init() {
+        super.init()
         updateAuthorizationStatus()
     }
     
@@ -44,5 +45,20 @@ class PhotoLibraryManager: ObservableObject {
     func openSettings() {
         guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
         UIApplication.shared.open(settingsURL)
+    }
+    
+    // MARK: - PHPickerViewControllerDelegate Methods
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let provider = results.first?.itemProvider else { return }
+        if provider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
+            provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { (url, error) in
+                DispatchQueue.main.async {
+                    if let url = url {
+                        // Дальнейшие действия с выбранным видео
+                    }
+                }
+            }
+        }
     }
 }

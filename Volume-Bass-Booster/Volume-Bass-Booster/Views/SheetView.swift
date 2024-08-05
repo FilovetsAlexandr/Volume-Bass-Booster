@@ -14,7 +14,7 @@ struct SheetView: View {
     var button1: Config
     var button2: Config?
     @ObservedObject var photoLibraryManager: PhotoLibraryManager
-    @EnvironmentObject var router: Router
+    @Binding var showSheet: Bool
 
     var body: some View {
         VStack(spacing: 15) {
@@ -35,7 +35,7 @@ struct SheetView: View {
             ButtonView(button1, action: photoLibraryManager.openSettings)
             if let button2 {
                 ButtonView(button2) {
-                    router.navigate(to: .main)
+                    showSheet = false
                 }
             }
             

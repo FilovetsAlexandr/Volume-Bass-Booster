@@ -12,7 +12,7 @@ import SDWebImageSwiftUI
 struct Gallery: View {
     @ObservedObject var photoLibraryManager: PhotoLibraryManager
     @Binding var showSheet: Bool
-
+    
     var body: some View {
         VStack {
             Image("gallery")
@@ -22,7 +22,9 @@ struct Gallery: View {
                 .padding()
             Button {
                 photoLibraryManager.requestPhotoLibraryAccess()
-                if photoLibraryManager.showingPermissionSheet {
+                if photoLibraryManager.authorizationStatus == .authorized {
+                    openPhotoPicker()
+                } else {
                     showSheet = true
                 }
             } label: {
@@ -51,6 +53,21 @@ struct Gallery: View {
                         .stroke(Color.white.opacity(0.1), lineWidth: 2)
                 )
         )
+    }
+
+    func openPhotoPicker() {
+        var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
+        configuration.filter = .videos // Только видео
+        configuration.selectionLimit = 1 // Ограничение на выбор одного видео
+
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = photoLibraryManager
+
+        // Презентация контроллера выбора
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootVC = windowScene.windows.first?.rootViewController {
+            rootVC.present(picker, animated: true, completion: nil)
+        }
     }
 }
 
