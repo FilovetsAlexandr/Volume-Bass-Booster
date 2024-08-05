@@ -4,10 +4,9 @@
 //
 //  Created by Alexandr Filovets on 30.07.24.
 //
-
-import SDWebImageSwiftUI
 import SwiftUI
 import PhotosUI
+import SDWebImageSwiftUI
 
 struct MainView: View {
     @EnvironmentObject var router: Router
@@ -93,19 +92,24 @@ struct MainView: View {
                 image: "gallery",
                 button1: .init(
                     content: "Go to Settings",
-                    tint: Color.theme.yellowColor,
+                    tint: .yellow,
                     foreground: .black),
                 button2: .init(
                     content: "Cancel",
-                    tint: Color.white.opacity(0.07),
+                    tint: .gray,
                     foreground: .white
                 ),
-                photoLibraryManager: photoLibraryManager
+                photoLibraryManager: photoLibraryManager,
+                showSheet: $showSheet
             )
             .presentationDetents([.height(330)])
         }
+        .onAppear {
+            photoLibraryManager.updateAuthorizationStatus()
+        }
     }
 }
+
 
 
 #Preview {

@@ -1,24 +1,24 @@
 //
-//  CustomSegmentedControl.swift
+//  CustomSegmentedControlRight.swift
 //  Volume-Bass-Booster
 //
-//  Created by Alexandr Filovets on 2.08.24.
+//  Created by Alexandr Filovets on 5.08.24.
 //
 
 import SwiftUI
 
-enum Category: String, CaseIterable {
-    case audio = "Audio"
-    case video = "Video"
+enum CategoryRight: String, CaseIterable {
+    case original = "Original"
+    case boosted = "Boosted"
 }
 
-struct CustomSegmentedControl: View {
-    @Binding var selectedSegment: Category
+struct CustomSegmentedControlRight: View {
+    @Binding var selectedSegment: CategoryRight
     @Namespace private var animation
     
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(Category.allCases, id: \.self) { category in
+            ForEach(CategoryRight.allCases, id: \.self) { category in
                 Text(category.rawValue)
                     .fontWeight(.bold)
                     .foregroundColor(selectedSegment == category ? .black : .white)
@@ -46,13 +46,14 @@ struct CustomSegmentedControl: View {
     }
 }
 
-struct CustomSegmentedControl_Previews: PreviewProvider {
-    @State static var selectedSegment: Category = .audio
+struct CustomSegmentedControlRight_Previews: PreviewProvider {
+    @State static var selectedSegment: CategoryRight = .boosted
 
     static var previews: some View {
-        CustomSegmentedControl(selectedSegment: $selectedSegment)
+        CustomSegmentedControlRight(selectedSegment: $selectedSegment)
             .padding()
             .previewLayout(.sizeThatFits)
             .background(Color.black)
     }
 }
+

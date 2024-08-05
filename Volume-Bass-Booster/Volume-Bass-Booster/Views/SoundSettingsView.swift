@@ -6,11 +6,20 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct SoundSettingsView: View {
+//    let videoURL: URL
+    @State private var player = AVPlayer()
+    @State private var isPlaying = true
+    @State private var bassBooster: Float = 0
+    @State private var volumeAmplifier: Float = 0
+    @State private var selectedTab: Tab = .boosted
     @EnvironmentObject var router: Router
-    @State private var bassBoost: Double = 0
-    @State private var volumeAmplifier: Double = 0
+
+    enum Tab {
+        case original, boosted
+    }
 
     var body: some View {
         VStack {
@@ -21,7 +30,6 @@ struct SoundSettingsView: View {
                     Image(systemName: "arrow.left")
                         .resizable()
                         .frame(width: 24, height: 24)
-                        .padding()
                 }
                 Spacer()
                 Text("Sound Settings")
@@ -35,38 +43,112 @@ struct SoundSettingsView: View {
             }
             .padding()
 
-            // Слайдер для Bass Booster
-            HStack {
-                Text("Bass Booster")
-                Slider(value: $bassBoost, in: 0...100)
-                    .accentColor(.yellow)
-                Text("\(Int(bassBoost))%")
-            }
-            .padding()
+            VStack {
+                SliderView(label: "Bass Booster", value: $bassBooster)
+                SliderView(label: "Volume Amplifier", value: $volumeAmplifier)
 
-            // Слайдер для Volume Amplifier
-            HStack {
-                Text("Volume Amplifier")
-                Slider(value: $volumeAmplifier, in: 0...100)
-                    .accentColor(.yellow)
-                Text("\(Int(volumeAmplifier))%")
-            }
-            .padding()
+                VideoPlayer(player: player)
+                    .onAppear {
+//                        player = AVPlayer(url: videoURL)
+                        player.play()
+                    }
+                    .frame(height: 250)
 
-            // Пример видео миниатюры
-            Image(systemName: "video")
-                .resizable()
-                .frame(width: 300, height: 200)
+                HStack {
+                    Text("VideoName_088")
+                        .font(.custom("Archivo", size: 16))
+                    Spacer()
+                    Text("video file")
+                        .font(.custom("Archivo", size: 14))
+                        .foregroundColor(.gray)
+                }
                 .padding()
 
-            Spacer()
+                VideoControls(player: $player, isPlaying: $isPlaying)
+
+                Picker("", selection: $selectedTab) {
+                    Text("Original").tag(Tab.original)
+                    Text("Boosted").tag(Tab.boosted)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+            }
+            .background(Color.black.edgesIgnoringSafeArea(.all))
         }
-        .background(Color.black.edgesIgnoringSafeArea(.all))
-        .foregroundColor(.white)
     }
 }
 
-#Preview {
-    SoundSettingsView()
+struct SliderView: View {
+    let label: String
+    @Binding var value: Float
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(label)
+                .font(.custom("Archivo", size: 16))
+                .bold()
+            Slider(value: $value, in: 0...100)
+                .accentColor(.yellow)
+            Text("\(Int(value))%")
+                .font(.custom("Archivo", size: 14))
+                .foregroundColor(.gray)
+        }
+        .padding()
+    }
 }
+
+struct VideoControls: View {
+    @Binding var player: AVPlayer
+    @Binding var isPlaying: Bool
+
+    var body: some View {
+        HStack {
+            Text("\(currentTime())")
+            Slider(value: Binding(
+                get: {
+                    Double(player.currentTime().seconds)
+                },
+                set: { newValue in
+                    let time = CMTime(seconds: newValue, preferredTimescale: 600)
+                    player.seek(to: time)
+                }
+            ), in: 0...Double(player.currentItem?.duration.seconds ?? 0))
+            Text("\(duration())")
+            Button(action: {
+                if isPlaying {
+                    player.pause()
+                } else {
+                    player.play()
+                }
+                isPlaying.toggle()
+            }) {
+                Image(systemName: isPlaying ? "pause" : "play")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+        }
+        .padding()
+    }
+
+    func currentTime() -> String {
+        let seconds = player.currentTime().seconds
+        return formatTime(seconds: seconds)
+    }
+
+    func duration() -> String {
+        let seconds = player.currentItem?.duration.seconds ?? 0
+        return formatTime(seconds: seconds)
+    }
+
+    func formatTime(seconds: Double) -> String {
+        let minutes = Int(seconds) / 60
+        let seconds = Int(seconds) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+}
+
+//#Preview {
+//    SoundSettingsView()
+//}
+
 
