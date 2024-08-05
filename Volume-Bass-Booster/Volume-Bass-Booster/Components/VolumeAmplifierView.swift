@@ -13,7 +13,7 @@ struct VolumeAmplifierView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Bass Booster")
+                Text("Volume Amplifier")
                     .font(.custom("Archivo", size: 18))
                     .foregroundColor(.white)
                     .bold()
