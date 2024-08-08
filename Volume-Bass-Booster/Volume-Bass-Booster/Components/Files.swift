@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct Files: View {
+    @State private var isDocumentPickerPresented = false
+    @State private var selectedFileURL: URL?
+    @EnvironmentObject var router: Router
     var body: some View {
         VStack {
             Image("files")
@@ -17,7 +21,7 @@ struct Files: View {
 
                 .padding()
             Button {
-                // galery open
+                isDocumentPickerPresented = true
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
@@ -44,8 +48,26 @@ struct Files: View {
                         .stroke(Color.white.opacity(0.1), lineWidth: 2)
                 )
         )
-    }
-}
+        
+        .fileImporter(
+                   isPresented: $isDocumentPickerPresented,
+                   allowedContentTypes: [UTType.mp3, UTType.movie],
+                   allowsMultipleSelection: false
+               ) { result in
+                   switch result {
+                   case .success(let urls):
+                       if let selectedFileURL = urls.first {
+                           self.selectedFileURL = selectedFileURL
+                           // Переход к SoundSettingsRightView с использованием роутера и передачей URL файла
+                           router.selectedFileURL = selectedFileURL
+                           router.navigate(to: .soundsettings) // Установите URL файла в роутере или в другой глобальной переменной
+                       }
+                   case .failure(let error):
+                       print("Ошибка при выборе файла: \(error.localizedDescription)")
+                   }
+               }
+           }
+       }
 
 #Preview {
     Files()

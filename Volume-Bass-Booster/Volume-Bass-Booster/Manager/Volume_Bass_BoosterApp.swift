@@ -24,7 +24,11 @@ struct Volume_Bass_BoosterApp: App {
                            case .library:
                                LibraryView()
                            case .soundsettings:
-                               SoundSettingsView()
+                               if let fileURL = router.selectedFileURL {
+                                   SoundSettingsRightView()
+                               } else {
+                                   Text("No file selected")
+                               }
                            }
                        }
                }

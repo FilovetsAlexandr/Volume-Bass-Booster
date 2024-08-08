@@ -14,10 +14,10 @@ final class Router: ObservableObject {
         case settings
         case library
         case soundsettings
-//        case compressvideo(videoURL: URL)
     }
     
     @Published var navPath = NavigationPath()
+    @Published var selectedFileURL: URL?
     
     func navigate(to destination: Destination) {
         navPath.append(destination)
